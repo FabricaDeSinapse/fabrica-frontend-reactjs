@@ -80,9 +80,13 @@ class Game extends React.Component {
   }
 
   render() {
-    const hasWinner = calculateWinner(this.state.squares);
+    const squares = this.state.squares;
+    const hasWinner = calculateWinner(squares);
 
     const winner = this.state.nextMove === 'X' ? 'O' : 'X';
+
+    const filledSquares = squares.filter(Boolean);
+    const draw = !hasWinner && filledSquares.length === squares.length;
 
     return (
       <div className="game">
@@ -91,7 +95,9 @@ class Game extends React.Component {
         </div>
 
         <div className="game-info">
-          {hasWinner ? `${winner} venceu!!` : `Próxima Jogada: ${this.state.nextMove}`}
+          {hasWinner && !draw ? `${winner} venceu!!` : ''}
+          {!hasWinner && draw ? 'Deu velha!!' : ''}
+          {!hasWinner && !draw ? `Próxima Jogada: ${this.state.nextMove}` : ''}
           <br/>
           <button onClick={() => this.restartGame()}>Reiniciar o jogo</button>
         </div>
