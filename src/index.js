@@ -117,12 +117,11 @@ function calculateWinner(squares) {
     [2, 4, 6]
   ];
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
+  return lines.some(([a, b, c]) => squares[a] && squares[a] === squares[b] && squares[b] === squares[c]);
 
-    const a = line[0];
-    const b = line[1];
-    const c = line[2];
+  /*
+  for (const line of lines) {
+    const [a, b, c] = line;
 
     if (squares[a] && squares[a] === squares[b] && squares[b] === squares[c]) {
       return true;
@@ -130,4 +129,5 @@ function calculateWinner(squares) {
   }
 
   return false;
+  */
 }
